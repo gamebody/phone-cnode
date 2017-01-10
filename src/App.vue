@@ -1,23 +1,20 @@
 <template>
   <div id="app">
-    <vheader></vheader>
     <router-view></router-view>
-    <bottomnav></bottomnav>
+    <vfooter></vfooter>
   </div>
 </template>
 
 <script>
-import vheader from './components/vheader'
-import bottomnav from './components/bottomnav'
+import vfooter from './components/footer'
 export default {
   name: 'app',
   components: {
-    vheader,
-    bottomnav
+    vfooter
   }
 }
 </script>
 
-<style lang="scss">
+<style lang="stylus">
   
 </style>

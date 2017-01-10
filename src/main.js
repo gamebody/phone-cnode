@@ -8,7 +8,7 @@ import { routes } from 'src/routes'
 /* eslint-disable no-new */
 Vue.use(VueRouter)
 
-import './assets/css/fontstyle.scss'
+import './assets/css/fontstyle.styl'
 
 const router = new VueRouter({
   mode: 'history',

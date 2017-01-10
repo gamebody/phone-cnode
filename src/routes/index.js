@@ -1,7 +1,7 @@
 export const routes = [
   {
-    path: '/home',
-    name: 'home',
+    path: '/',
+    name: 'topic',
     component: require('src/views/topic.vue')
   }
 ]

@@ -1,13 +1,20 @@
 <template>
   <div>
-    topic
+    <vheader></vheader>
+    <router-view name="path"></router-view>
   </div>
 </template>
 
 <script>
-  export default { }
+  import vheader from 'components/header'
+
+  export default {
+    components: {
+      vheader
+    }
+  }
 </script>
 
-<style lang='scss'>
+<style lang='stylus'>
 
 </style>
