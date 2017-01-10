@@ -26,7 +26,7 @@
             className: 'icon-alert'
           },
           {
-            path: '/go',
+            path: '/message',
             className: 'icon-go'
           },
           {

@@ -1,14 +1,36 @@
 export const routes = [
   {
-    path: '/topics',
-    redirect: '/topics/all'
-  },
-  {
     path: '/',
-    redirect: '/topics/all'
-  },
-  {
-    path: '/topics/:tab',
-    component: require('src/views/topic.vue')
+    component: require('src/views/main'),
+    children: [
+      {
+        path: '',
+        redirect: '/topics/all'
+      },
+      {
+        path: '/topics',
+        redirect: '/topics/all'
+      },
+      {
+        path: '/find',
+        component: require('src/views/find')
+      },
+      {
+        path: '/alert',
+        component: require('src/views/alert')
+      },
+      {
+        path: '/message',
+        component: require('src/views/message')
+      },
+      {
+        path: '/info',
+        component: require('src/views/info')
+      },
+      {
+        path: '/topics/:tab',
+        component: require('src/views/topics')
+      }
+    ]
   }
 ]
