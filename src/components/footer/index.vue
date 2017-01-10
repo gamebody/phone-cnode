@@ -14,7 +14,7 @@
       return {
         classNames: [
           {
-            path: '/',
+            path: '/topics',
             className: 'icon-list2'
           },
           {

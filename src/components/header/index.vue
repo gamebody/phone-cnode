@@ -2,19 +2,19 @@
   <header>
     <ul>
       <li>
-        <router-link to="/" :class="{'active': !this.$route.query.tab}">全部</router-link>
+        <router-link to="/topics/all" :class="{'active': $route.params.tab == 'all'}">全部</router-link>
       </li>
       <li>
-        <router-link to="/?tab=good" :class="{'active': this.$route.query.tab == 'good'}">精华</router-link>
+        <router-link to="/topics/good" :class="{'active': $route.params.tab == 'good'}">精华</router-link>
       </li>
       <li>
-        <router-link to="/?tab=share" :class="{'active': this.$route.query.tab == 'share'}">分享</router-link>
+        <router-link to="/topics/share" :class="{'active': $route.params.tab == 'share'}">分享</router-link>
       </li>
       <li>
-        <router-link to="/?tab=ask" :class="{'active': this.$route.query.tab == 'ask'}">问答</router-link>
+        <router-link to="/topics/ask" :class="{'active': $route.params.tab == 'ask'}">问答</router-link>
       </li>  
       <li>
-        <router-link to="/?tab=job" :class="{'active': this.$route.query.tab == 'job'}">招聘</router-link>
+        <router-link to="/topics/job" :class="{'active': $route.params.tab == 'job'}">招聘</router-link>
       </li>     
     </ul>
   </header>

@@ -9,6 +9,7 @@ import { routes } from 'src/routes'
 Vue.use(VueRouter)
 
 import './assets/css/fontstyle.styl'
+import '../static/css/reset.css'
 
 const router = new VueRouter({
   mode: 'history',
