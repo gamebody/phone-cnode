@@ -32,5 +32,10 @@ export const routes = [
         component: require('src/views/topics')
       }
     ]
+  },
+  {
+    path: '/topic/:id',
+    name: 'topic',
+    component: require('src/views/topicitem')
   }
 ]

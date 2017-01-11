@@ -10,6 +10,10 @@ Vue.use(VueRouter)
 
 import './assets/css/fontstyle.styl'
 import '../static/css/reset.css'
+import 'github-markdown-css'
+import { formatDate } from 'src/filters/formatDate'
+// 全局过滤器
+Vue.filter('formatDate', formatDate)
 
 const router = new VueRouter({
   mode: 'history',

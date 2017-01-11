@@ -1,7 +1,10 @@
 <template>
   <div class="topic-list">
     <ul>
-      <li v-for="(topicItem,index) in topicList" :class="[{good:topicItem.good},{top:topicItem.top}]">
+      <li 
+        v-for="(topicItem,index) in topicList" 
+        :class="[{good:topicItem.good},{top:topicItem.top}]"
+        @click="routeToTopic(topicItem.id)">
         <div class="topic-user">
           <img :src="topicItem.author.avatar_url" width='20' height="20">
           <span class="user-name">{{ topicItem.author.loginname }}</span>
@@ -47,6 +50,14 @@
         })
         .catch((err) => {
           console.log(err)
+        })
+      },
+      routeToTopic (topicId) {
+        this.$router.push({
+          name: 'topic',
+          params: {
+            id: topicId
+          }
         })
       }
     },
