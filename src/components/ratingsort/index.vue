@@ -6,15 +6,15 @@
     <div class="right">
       <div class="right-wrapper" @click="togglePlane">
         <span>{{ currentSort === 'time' ? '按时间排序' : '按质量排序' }}</span>
-        <i class="icon-see"></i>
+        <i class="icon-sort"></i>
         <div class="sortPlane" v-show="plane">
           <div class="plane-item" @click.stop="sort('quality')">
             <span>按质量排序</span>
-            <i class="icon-find" v-show="currentSort === 'quality'"></i>
+            <i class="icon-yes" v-show="currentSort === 'quality'"></i>
           </div>
           <div class="plane-item" @click.stop="sort('time')">
             <span>按时间排序</span>
-            <i class="icon-find" v-show="currentSort === 'time'"></i>
+            <i class="icon-yes" v-show="currentSort === 'time'"></i>
           </div>
         </div>
       </div>

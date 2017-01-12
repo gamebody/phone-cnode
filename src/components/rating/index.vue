@@ -10,7 +10,7 @@
         <span>{{ rating.create_at | formatDate }}</span>
       </div>
       <div class="up">
-        <i class="icon-find"></i>
+        <i class="icon-up"></i>
         <span>{{ upCount }}</span>
       </div>
     </div>
@@ -63,7 +63,17 @@
         color: #788790
       .up
         float: right
+        font-size: 0
         color: #788790
+        line-height: 1
+        i
+          display: inline-block
+          font-size: 15px
+        span
+          display: inline-block
+          margin-left: 10px
+          font-size: 15px
+          vertical-align: top
 
     
 </style>

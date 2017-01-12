@@ -4,7 +4,6 @@
       <vheader
         :is-nav="false"></vheader>
     </div>
-    <loading></loading>
     <div class="topic-content" v-if="dataState.finished">
       <div class="topic-main">
         <div class="user">
@@ -22,7 +21,7 @@
         </div>
       </div>
       <div class="goRating">
-        <i class="icon-find"></i>
+        <i class="icon-write"></i>
         <span>写评论</span>
       </div>
       <ratingsort></ratingsort>
@@ -36,7 +35,7 @@
     </div>
 
     <div v-else-if="dataState.loading">
-      
+      <loading></loading>    
     </div>
     <div v-else="dataState.err">
       err
