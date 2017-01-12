@@ -26,7 +26,7 @@
         <span>写评论</span>
       </div>
       <ratingsort></ratingsort>
-
+      <loading></loading>
       <ul class="topic-ratings">
         <li v-for="(rating,index) in topic.replies">
           <rating
@@ -50,6 +50,7 @@
   import vheader from 'components/header'
   import ratingsort from 'components/ratingsort'
   import rating from 'components/rating'
+  import loading from 'components/loading'
 
   export default {
     data () {
@@ -86,7 +87,8 @@
     components: {
       vheader,
       ratingsort,
-      rating
+      rating,
+      loading
     }
   }
 </script>
