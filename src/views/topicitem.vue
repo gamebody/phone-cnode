@@ -24,20 +24,23 @@
         <i class="icon-write"></i>
         <span>写评论</span>
       </div>
-      <ratingsort></ratingsort>
+
+      <ratingsort
+        :rating-num="ratings.length"
+        v-on:sort="sort"></ratingsort>
       
       <ul class="topic-ratings">
-        <li v-for="(rating,index) in topic.replies">
+        <li v-for="(rating,index) in sortRatings">
           <rating
             :rating="rating"></rating>
         </li>
       </ul>
     </div>
 
-    <div v-else-if="dataState.loading">
+    <div v-if="dataState.loading">
       <loading></loading>    
     </div>
-    <div v-else="dataState.err">
+    <div v-if="dataState.err">
       err
     </div>
   </div>
@@ -55,11 +58,33 @@
     data () {
       return {
         topic: {},
+        ratings: [],
+        sortStr: 'default',
         dataState: {
           loading: false,
           err: false,
           finished: false
         }
+      }
+    },
+    computed: {
+      sortRatings () {
+        if (this.sortStr === 'default') {
+          return this.ratings
+        } else if (this.sortStr === 'quality') {
+          return this.ratings.sort((a, b) => (
+            b.ups.length - a.ups.length
+          ))
+        } else {
+          return this.ratings.sort((a, b) => (
+            new Date(a.create_at) - new Date(b.create_at)
+          ))
+        }
+      }
+    },
+    watch: {
+      sortStr () {
+        this.getRarings()
       }
     },
     created () {
@@ -69,13 +94,30 @@
       back () {
         this.$router.go(-1)
       },
+      sort (sortSty) {
+        this.sortStr = sortSty
+      },
       getData () {
         this.dataState.loading = true
         Axios.get(`https://cnodejs.org/api/v1/topic/${this.$route.params.id}`)
           .then((res) => {
             this.topic = res.data.data
+            this.ratings = res.data.data.replies
             this.dataState.loading = false
             this.dataState.finished = true
+          })
+          .catch((err) => {
+            this.dataState.err = true
+            console.log(err)
+          })
+      },
+      getRarings () {
+        this.dataState.loading = true
+        Axios.get(`https://cnodejs.org/api/v1/topic/${this.$route.params.id}`)
+          .then((res) => {
+            this.ratings = res.data.data.replies
+            this.dataState.finished = true
+            this.dataState.loading = false
           })
           .catch((err) => {
             this.dataState.err = true

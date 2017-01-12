@@ -39,7 +39,7 @@
     margin-bottom: 8px
     border-top: 1px solid #eaecf0
     border-bottom: 1px solid #e3e3e4
-    box-shadow: 0 1px 3px 1px #c2c4c6
+    box-shadow: 0 1px 2px 1px #e3e3e4
     background: #fff
     .user
       font-size: 0

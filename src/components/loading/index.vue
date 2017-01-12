@@ -17,7 +17,7 @@
 
 <style lang='stylus' scoped>
   .loading-wrap
-    position: absolute
+    position: fixed
     width: 100%
     top: 80px
     left: 0

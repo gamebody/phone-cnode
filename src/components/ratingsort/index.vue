@@ -5,7 +5,7 @@
     </div>
     <div class="right">
       <div class="right-wrapper" @click="togglePlane">
-        <span>{{ currentSort === 'time' ? '按时间排序' : '按质量排序' }}</span>
+        <span>{{ string }}</span>
         <i class="icon-sort"></i>
         <div class="sortPlane" v-show="plane">
           <div class="plane-item" @click.stop="sort('quality')">
@@ -15,6 +15,10 @@
           <div class="plane-item" @click.stop="sort('time')">
             <span>按时间排序</span>
             <i class="icon-yes" v-show="currentSort === 'time'"></i>
+          </div>
+          <div class="plane-item" @click.stop="sort('default')">
+            <span>按楼层排序</span>
+            <i class="icon-yes" v-show="currentSort === 'default'"></i>
           </div>
         </div>
       </div>
@@ -26,7 +30,7 @@
   export default {
     props: {
       ratingNum: {
-        type: String,
+        type: Number,
         default: 0
       }
     },
@@ -36,13 +40,29 @@
         plane: false
       }
     },
+    computed: {
+      string () {
+        if (this.currentSort === 'time') {
+          return '按时间排序'
+        } else if (this.currentSort === 'quality') {
+          return '按质量排序'
+        } else {
+          return '按楼层排序'
+        }
+      }
+    },
     methods: {
       togglePlane () {
         this.plane = !this.plane
       },
       sort (sortStr) {
+        if (this.currentSort === sortStr) {
+          this.togglePlane()
+          return
+        }
         this.currentSort = sortStr
         this.togglePlane()
+        this.$emit('sort', sortStr)
       }
     }
   }
