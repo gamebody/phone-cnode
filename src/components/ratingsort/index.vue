@@ -1,7 +1,7 @@
 <template>
   <div class="ratingsort">
     <div class="left">
-      <span>{{ ratingNum }}个评论</span>
+      <span>{{ ratingNumState }}</span>
     </div>
     <div class="right">
       <div class="right-wrapper" @click="togglePlane">
@@ -9,7 +9,7 @@
         <i class="icon-sort"></i>
         <div class="sortPlane" v-show="plane">
           <div class="plane-item" @click.stop="sort('quality')">
-            <span>按质量排序</span>
+            <span>按点赞排序</span>
             <i class="icon-yes" v-show="currentSort === 'quality'"></i>
           </div>
           <div class="plane-item" @click.stop="sort('time')">
@@ -36,7 +36,7 @@
     },
     data () {
       return {
-        currentSort: 'time',
+        currentSort: 'default',
         plane: false
       }
     },
@@ -45,9 +45,16 @@
         if (this.currentSort === 'time') {
           return '按时间排序'
         } else if (this.currentSort === 'quality') {
-          return '按质量排序'
+          return '按点赞排序'
         } else {
           return '按楼层排序'
+        }
+      },
+      ratingNumState () {
+        if (this.ratingNum === 0) {
+          return '暂无评论'
+        } else {
+          return `${this.ratingNum}个评论`
         }
       }
     },

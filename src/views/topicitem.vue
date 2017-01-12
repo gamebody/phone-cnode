@@ -195,5 +195,7 @@
           font-size: 15px
           margin-left: 10px
           vertical-align: top
-
+      .topic-ratings
+        background: #f2f4f7
+        
 </style>
