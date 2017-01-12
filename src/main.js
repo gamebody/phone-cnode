@@ -11,6 +11,8 @@ Vue.use(VueRouter)
 import './assets/css/fontstyle.styl'
 import '../static/css/reset.css'
 import 'github-markdown-css'
+import vueScroll from 'vue-scroll'
+Vue.use(vueScroll)
 import { formatDate } from 'src/filters/formatDate'
 // 全局过滤器
 Vue.filter('formatDate', formatDate)

@@ -1,10 +1,12 @@
 <template>
-  <div class="topic">
+  <div class="topic" >
     <div class="header-wrapper">
       <vheader
-        :is-nav="false"></vheader>
+        :is-nav="false"
+        :title="header.title"
+        :ratingNum="header.ratingNum"></vheader>
     </div>
-    <div class="topic-content" v-if="dataState.finished">
+    <div class="topic-content" v-if="dataState.finished" v-scroll="onScroll">
       <div class="topic-main">
         <div class="user">
           <img :src="topic.author.avatar_url" width='26' height='26'>
@@ -60,11 +62,16 @@
         topic: {},
         ratings: [],
         sortStr: 'default',
+        header: {
+          title: null,
+          ratingNum: 0
+        },
         dataState: {
           loading: false,
           err: false,
           finished: false
-        }
+        },
+        scrollTop: 0
       }
     },
     computed: {
@@ -85,6 +92,20 @@
     watch: {
       sortStr () {
         this.getRarings()
+      },
+      scrollTop () {
+        if (this.scrollTop < 150) {
+          this.header = {
+            title: '',
+            ratingNum: 0
+          }
+        } else {
+          console.log(this.ratings.length)
+          this.header = {
+            title: this.topic.title,
+            ratingNum: this.ratings.length
+          }
+        }
       }
     },
     created () {
@@ -96,6 +117,9 @@
       },
       sort (sortSty) {
         this.sortStr = sortSty
+      },
+      onScroll (e, position) {
+        this.scrollTop = position.scrollTop
       },
       getData () {
         this.dataState.loading = true
@@ -136,12 +160,16 @@
 
 <style lang='stylus'>
   .topic
+    height: 100%
     .header-wrapper
       position: fixed
       left: 0
       top: 0
     .topic-content
-      margin-top: 56px
+      box-sizing: border-box
+      padding-top: 56px
+      height: 100%
+      overflow: auto
       .topic-main
         padding: 15px
         .user

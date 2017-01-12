@@ -22,7 +22,7 @@
     </div>
     <div class="header-info" v-if="!isNav">
       <p>{{ title }}</p>
-      <p>{{ ratingNum }}个评论</p>
+      <p>{{ ratingNumStr }}</p>
     </div>
   </header>
 </template>
@@ -36,15 +36,24 @@
       },
       title: {
         type: String,
-        default: '为什么大家都说程序员需要好键盘？'
+        default: ''
       },
       ratingNum: {
-        type: String,
-        default: '35'
+        type: Number,
+        default: 0
       },
       iconType: {
         type: String,
         default: 'back' // or close
+      }
+    },
+    computed: {
+      ratingNumStr () {
+        if (this.ratingNum === 0) {
+          return ''
+        } else {
+          return `${this.ratingNum}个评论`
+        }
       }
     },
     methods: {
