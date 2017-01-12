@@ -1,6 +1,6 @@
 <template>
   <div class="topic-list">
-    <ul>
+    <ul v-if="!loading">
       <li 
         v-for="(topicItem,index) in topicList" 
         :class="[{good:topicItem.good},{top:topicItem.top}]"
@@ -21,17 +21,22 @@
         </div>
       </li>
     </ul>
+    <div v-if="loading">
+      <loading></loading>
+    </div>
   </div>
 </template>
 
 <script>
   import Axios from 'axios'
   import { formatDate } from 'src/filters/formatDate'
+  import loading from 'components/loading'
 
   export default {
     data () {
       return {
-        topicList: []
+        topicList: [],
+        loading: true
       }
     },
     methods: {
@@ -42,10 +47,12 @@
         } else {
           url = `https://cnodejs.org/api/v1/topics?tab=${tab}`
         }
+        this.loading = true
         Axios.get(url)
         .then((res) => {
           if (res.data.success) {
             this.topicList = res.data.data
+            this.loading = false
           }
         })
         .catch((err) => {
@@ -83,6 +90,9 @@
       $route (to, from) {
         this.getTopicList(to.params.tab)
       }
+    },
+    components: {
+      loading
     }
   }
 </script>
