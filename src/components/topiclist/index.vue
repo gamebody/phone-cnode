@@ -1,10 +1,11 @@
 <template>
-  <div class="topic-list">
+  <div class="topic-list" v-infinite-scroll="loadMore" infinite-scroll-disabled="busy">
     <ul v-if="!loading">
       <li 
         v-for="(topicItem,index) in topicList" 
         :class="[{good:topicItem.good},{top:topicItem.top}]"
-        @click="routeToTopic(topicItem.id)">
+        @click="routeToTopic(topicItem.id)"
+        key="index">
         <div class="topic-user">
           <img :src="topicItem.author.avatar_url" width='20' height="20">
           <span class="user-name">{{ topicItem.author.loginname }}</span>
@@ -24,6 +25,9 @@
     <div v-if="loading">
       <loading></loading>
     </div>
+    <div v-show="busy">
+      <loading></loading>
+    </div>
   </div>
 </template>
 
@@ -36,27 +40,32 @@
     data () {
       return {
         topicList: [],
-        loading: true
+        loading: true,
+        currentPage: 1,
+        limit: 10,
+        busy: false
       }
     },
     methods: {
       getTopicList (tab) {
         var url = ''
         if (tab === 'all') {
-          url = `https://cnodejs.org/api/v1/topics`
+          url = `https://cnodejs.org/api/v1/topics?limit=${this.limit}&page=1`
         } else {
-          url = `https://cnodejs.org/api/v1/topics?tab=${tab}`
+          url = `https://cnodejs.org/api/v1/topics?limit=${this.limit}&page=1&tab=${tab}`
         }
         this.loading = true
+        this.busy = true
         Axios.get(url)
         .then((res) => {
           if (res.data.success) {
             this.topicList = res.data.data
             this.loading = false
+            this.busy = false
           }
         })
         .catch((err) => {
-          console.log(err)
+          console.log(err + '错误了')
         })
       },
       routeToTopic (topicId) {
@@ -66,6 +75,30 @@
             id: topicId
           }
         })
+      },
+      loadMore () {
+        this.busy = true
+        this.currentPage += 1
+        console.log(this.currentPage)
+        let url = ''
+        if (this.$route.params.tab === 'all') {
+          url = `https://cnodejs.org/api/v1/topics?limit=${this.limit}&page=${this.currentPage}`
+        } else {
+          url = `https://cnodejs.org/api/v1/topics?limit=${this.limit}&page=${this.currentPage}&tab=${this.$route.params.tab}`
+        }
+        Axios.get(url)
+          .then((res) => {
+            const data = res.data.data
+            if (res.data.success) {
+              data.forEach((item) => {
+                this.topicList.push(item)
+              })
+              this.busy = false
+            }
+          })
+          .catch((err) => {
+            console.log(err)
+          })
       }
     },
     created () {
@@ -89,6 +122,7 @@
     watch: {
       $route (to, from) {
         this.getTopicList(to.params.tab)
+        this.currentPage = 1
       }
     },
     components: {
@@ -99,7 +133,7 @@
 
 <style lang='stylus'>
   .topic-list
-    margin-top: 56px
+    margin: 56px 0
     background: #f2f4f7
     ul
       li

@@ -16,5 +16,6 @@
 </script>
 
 <style lang='stylus'>
-
+  .main
+    height: 100%
 </style>
