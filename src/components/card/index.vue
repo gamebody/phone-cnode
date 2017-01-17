@@ -43,9 +43,9 @@
 <style lang='stylus'>
   .card
     box-sizing: border-box
-    width: 50%
+    width: 41vw
+    height: 220px
     padding: 20px
-    margin: 10px
     border: 1px solid #ccc
     position: relative
     box-shadow: 0 0 4px 0px #ccc
