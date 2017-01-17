@@ -18,7 +18,8 @@
       </li>     
     </ul>
     <div class="left" @click="goBack" v-if="!isNav">
-      <i :class="{'icon-arrow_lift': iconType === 'back'}"></i>
+      <i v-if="basic" :class="{'icon-arrow_lift': iconType === 'back'}"></i>
+      <p v-else="!basic">{{ basicStr }}</p>
     </div>
     <div class="header-info" v-if="!isNav">
       <p>{{ title }}</p>
@@ -45,6 +46,14 @@
       iconType: {
         type: String,
         default: 'back' // or close
+      },
+      basic: {
+        type: Boolean,
+        default: true
+      },
+      basicStr: {
+        type: String,
+        default: 'basicStr属性定义'
       }
     },
     computed: {
@@ -92,6 +101,10 @@
       i
         font-size: 18px
         color: #fff
+      p
+        font-size: 18px
+        color: #fff
+        font-weight: 800
     .header-info
       box-sizing: border-box
       float: left
