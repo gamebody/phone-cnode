@@ -9,8 +9,12 @@
 
     <div class="find-content">
       <div class="find-panel">
-        <div class="card-wrapper" v-for="n in 100">
-          <card></card>
+        <div class="card-wrapper" v-for="user in users">
+          <card
+            :avatar_url="user.avatar_url"
+            :loginname="user.userName"
+            :value="user.score"
+            :score="user.no"></card>
         </div> 
       </div>   
     </div>
@@ -24,8 +28,14 @@
 <script>
   import vheader from 'components/header'
   import card from 'components/card'
+  import users from 'src/data/users'
 
   export default {
+    data () {
+      return {
+        users: []
+      }
+    },
     methods: {
       random () {
         const clientWidth = document.documentElement.clientWidth || document.body.clientWidth // 视口宽度
@@ -36,6 +46,9 @@
         const panel = document.querySelector('.find-panel')
         panel.style.transform = `translate(${horizontalDis}, ${varticalDis})`
       }
+    },
+    created () {
+      this.users = users
     },
     components: {
       vheader,

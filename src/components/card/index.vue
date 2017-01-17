@@ -29,12 +29,12 @@
         default: 'gamebody'
       },
       score: {
-        type: Number,
-        default: 10
+        type: String,
+        default: '10'
       },
       value: {
-        type: Number,
-        default: 666
+        type: String,
+        default: '666'
       }
     }
   }
@@ -46,7 +46,8 @@
     width: 41vw
     height: 220px
     padding: 20px
-    border: 1px solid #ccc
+    border: 1px solid lighten(#1e8ae8, 35)
+    border-radius: 4px
     position: relative
     box-shadow: 0 0 4px 0px #ccc
     .card-avatar
