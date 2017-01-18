@@ -12,7 +12,10 @@
       <div class="info-login">
         <input type="text" placeholder="Access Token" v-model="token">
         <div class="login-btn" @click="login">
-          <a href="#">登录</a>
+          <a>登录</a>
+        </div>
+        <div class="login-btn" @click="logout">
+          <a>登出</a>
         </div>
       </div>
 
@@ -27,12 +30,15 @@
   export default {
     data () {
       return {
-        token: ''
+        token: 'a7354828-6563-4a9d-b56a-9d847f7cfb40'
       }
     },
     methods: {
       login () {
-        console.log(this.token)
+        this.$store.dispatch('login', this.token)
+      },
+      logout () {
+        this.$store.commit('deleteUserInfo')
       }
     },
     components: {

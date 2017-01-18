@@ -1,6 +1,6 @@
 import { login } from './api'
 
-export default {
+export const storeState = {
   state: {
     userInfo: { }
   },
@@ -10,16 +10,18 @@ export default {
     }
   },
   mutations: {
-    setUserInfo ({ userInfo }, user) {
-      userInfo = {
-        ...user
-      }
+    setUserInfo (state, user) {
+      state.userInfo = { ...user }
+    },
+    deleteUserInfo (state) {
+      state.userInfo = {}
     }
   },
   actions: {
     login ({ commit, state }, accessToken) {
-      const userInfo = login(accessToken)
-      commit('setUserInfo', userInfo)
+      login(accessToken, (userInfo) => {
+        commit('setUserInfo', userInfo)
+      })
     }
   }
 }

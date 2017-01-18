@@ -28,10 +28,8 @@ const router = new VueRouter({
   routes
 })
 
-import storeState from './vuex/store'
-const store = new Vuex.Store({
-  storeState
-})
+import { storeState } from './vuex/store'
+const store = new Vuex.Store(storeState)
 new Vue({
   el: '#app',
   template: '<App/>',
