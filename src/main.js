@@ -3,11 +3,13 @@
 import Vue from 'vue'
 import App from './App'
 import VueRouter from 'vue-router'
+import Vuex from 'vuex'
 import infiniteScroll from 'vue-infinite-scroll'
 
 import { routes } from 'src/routes'
 /* eslint-disable no-new */
 Vue.use(VueRouter)
+Vue.use(Vuex)
 
 import './assets/css/fontstyle.styl'
 import '../static/css/reset.css'
@@ -26,9 +28,14 @@ const router = new VueRouter({
   routes
 })
 
+import storeState from './vuex/store'
+const store = new Vuex.Store({
+  storeState
+})
 new Vue({
   el: '#app',
   template: '<App/>',
   components: { App },
-  router
+  router,
+  store
 })

@@ -1,11 +1,85 @@
 <template>
-  <div class="info">info</div>
+  <div class="info">
+    <div class="header-wrapper">
+      <vheader
+        :isNav="false"
+        :basic="false"
+        basic-str="User"></vheader>      
+    </div>
+
+    <div class="info-content">
+
+      <div class="info-login">
+        <input type="text" placeholder="Access Token" v-model="token">
+        <div class="login-btn" @click="login">
+          <a href="#">登录</a>
+        </div>
+      </div>
+
+    </div>
+    
+  </div>
 </template>
 
 <script>
-  export default {}
+  import vheader from 'components/header'
+
+  export default {
+    data () {
+      return {
+        token: ''
+      }
+    },
+    methods: {
+      login () {
+        console.log(this.token)
+      }
+    },
+    components: {
+      vheader
+    }
+  }
 </script>
 
 <style lang='stylus'>
+  .info
+    width: 100%
+    height: 100%
+    .header-wrapper
+      width: 100%
+      position: fixed
+      left: 0
+      top: 0
+      z-index: 100
+    .info-content
+      box-sizing: border-box
+      width: 100%
+      height: 100%
+      padding: 55px 0
+      .info-login
+        width: 100%
+        margin-top: 80%    
+        input
+          display: block
+          margin: 0 auto
+          width: 80%
+          height: 30px
+          margin-bottom: 20px
+          line-height: 30px
+          font-size: 20px
+          text-indent: 10px
+          border-bottom: 1px solid #1e8ae8
+          outline: none
+          color: #1e8ae8   
+        .login-btn
+          width: 60px
+          height: 40px
+          margin: 0 auto
+          line-height: 40px
+          text-align: center
+          font-size: 20px
+          a
+            color: #1e8ae8
+          
 
 </style>
