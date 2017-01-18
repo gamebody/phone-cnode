@@ -44,7 +44,10 @@
         const horizontalDis = -(Math.floor(Math.random() * 9) * cardWidth) + 'px' // 随机移动的水平距离
         const varticalDis = -(Math.floor(Math.random() * 9) * cardHeight) + 'px' // // 随机移动的垂直距离
         const panel = document.querySelector('.find-panel')
-        panel.style.transform = `translate(${horizontalDis}, ${varticalDis})`
+        panel.style.transform = `scale(0.95) translate(${horizontalDis}, ${varticalDis})`
+        setTimeout(() => {
+          panel.style.transform = `scale(1) translate(${horizontalDis}, ${varticalDis})`
+        }, 1000)
       }
     },
     created () {
@@ -59,6 +62,7 @@
 
 <style lang='stylus'>
   .find
+    height: 100%
     .header-wrapper
       position: fixed
       top: 0
@@ -66,9 +70,10 @@
       width: 100%
       z-index: 1000
     .find-content
+      box-sizing: border-box
       width: 100vw
-      height: 100vh
-      margin-top: 55px
+      height: 100%
+      padding: 55px 0
       overflow: hidden
       .find-panel
         width: calc(100vw * 5)
