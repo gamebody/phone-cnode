@@ -33,7 +33,6 @@
 
 <script>
   import Axios from 'axios'
-  import { formatDate } from 'src/filters/formatDate'
   import loading from 'components/loading'
 
   export default {
@@ -105,7 +104,6 @@
       this.getTopicList('all')
     },
     filters: {
-      formatDate,
       getLabel (label) {
         switch (label) {
           case 'share':
