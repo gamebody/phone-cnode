@@ -23,8 +23,15 @@
         </div>
       </div>
       <div class="goRating">
-        <i class="icon-write"></i>
-        <span>写评论</span>
+        <div class="left" @click="like">
+          <i class="icon-like" :class="{active: isLike}"></i>
+          <span>收藏</span>
+        </div>
+        <div class="right">
+          <i class="icon-write"></i>
+          <span>写评论</span>
+        </div>
+        
       </div>
 
       <ratingsort
@@ -87,6 +94,15 @@
             new Date(a.create_at) - new Date(b.create_at)
           ))
         }
+      },
+      userInfo () {
+        return this.$store.getters.getUserInfo
+      },
+      isLike () {
+        const topicCollect = this.userInfo.topicCollect
+        return topicCollect.some((item) => {
+          return item === this.$route.params.id
+        })
       }
     },
     watch: {
@@ -120,6 +136,19 @@
       },
       onScroll (e, position) {
         this.scrollTop = position.scrollTop
+      },
+      like () {
+        if (this.userInfo.isLogin) {
+          const topicId = this.$route.params.id
+          if (this.isLike === true) {
+            this.$store.dispatch('dislike', topicId)
+          } else {
+            this.$store.dispatch('like', topicId)
+          }
+        } else {
+          console.log('请登录')
+          return
+        }
       },
       getData () {
         this.dataState.loading = true
@@ -205,6 +234,7 @@
             font-size: 16px
             display: inline-block
       .goRating
+        display: flex
         height: 50px
         border-top: 1px solid #ececec
         border-bottom: 1px solid #c5c7ca        
@@ -214,15 +244,22 @@
         text-align: center
         line-height: 50px
         box-shadow: 1px 1px 1px #dfe1e4
-        i
-          display: inline-block
-          font-size: 15px
-          line-height: 50px
-        span
-          display: inline-block
-          font-size: 15px
-          margin-left: 10px
-          vertical-align: top
+        .left
+        .right
+          flex: 1
+          i
+            display: inline-block
+            font-size: 15px
+            line-height: 50px
+          span
+            display: inline-block
+            font-size: 15px
+            margin-left: 10px
+            vertical-align: top
+        .left
+          .icon-like
+            &.active
+              color: red
       .topic-ratings
         background: #f2f4f7
         

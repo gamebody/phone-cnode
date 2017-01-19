@@ -1,4 +1,4 @@
-import { getUserByToken, getTopicCollect } from './api'
+import { getUserByToken, getTopicCollect, dislike, like } from './api'
 
 export const storeState = {
   state: {
@@ -28,6 +28,15 @@ export const storeState = {
     },
     setAccessToken (state, accessToken) {
       state.userInfo.accessToken = accessToken
+    },
+    removeTopicCollect (state, topicId) {
+      const collect = state.userInfo.topicCollect.filter((item) => {
+        return item !== topicId
+      })
+      state.userInfo.topicCollect = collect
+    },
+    addTopicCollect (state, topicId) {
+      state.userInfo.topicCollect.push(topicId)
     }
   },
   actions: {
@@ -43,8 +52,28 @@ export const storeState = {
       commit('setAccessToken', accessToken)
       return dispatch('getUser', accessToken).then((username) => {
         getTopicCollect(username, (topicCollect) => {
-          commit('setTopicCollect', topicCollect)
+          const collectId = []
+          topicCollect.forEach((item) => {
+            collectId.push(item.id)  // 把收藏的文章的id存到数组中
+          })
+          commit('setTopicCollect', collectId)
         })
+      })
+    },
+    dislike ({ commit, dispatch, state }, topicId) {
+      const accessToken = state.userInfo.accessToken
+      dislike(accessToken, topicId, (data) => {
+        if (data.success === true) {
+          commit('removeTopicCollect', topicId)
+        }
+      })
+    },
+    like ({ commit, dispatch, state }, topicId) {
+      const accessToken = state.userInfo.accessToken
+      like(accessToken, topicId, (data) => {
+        if (data.success === true) {
+          commit('addTopicCollect', topicId)
+        }
       })
     }
   }
