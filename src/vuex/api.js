@@ -1,7 +1,7 @@
 import Axios from 'axios'
 
-export const login = (access, callback) => {
-  Axios.post(`https://cnodejs.org/api/v1/accesstoken?accesstoken=${access}`)
+export const getUserByToken = (accessToken, callback) => {
+  Axios.post(`https://cnodejs.org/api/v1/accesstoken?accesstoken=${accessToken}`)
   .then((res) => {
     if (res.statusText === 'OK' && res.status === 200) {
       callback(res.data)
@@ -10,4 +10,16 @@ export const login = (access, callback) => {
   .catch((err) => {
     console.log(err)
   })
+}
+
+export const getTopicCollect = (username, callback) => {
+  Axios.get(`https://cnodejs.org/api/v1/topic_collect/${username}`)
+    .then((res) => {
+      if (res.statusText === 'OK' && res.status === 200) {
+        callback(res.data.data)
+      }
+    })
+    .catch((err) => {
+      console.log(err)
+    })
 }
