@@ -1,7 +1,7 @@
 <template>
   <div class="like-card">
     <div class="card-header">
-      <img :src="avatar_url" width="40" height="40">
+      <img :src="avatarUrl" width="40" height="40">
       <span>{{ username }}</span>
     </div>
     <div class="card-content">
@@ -21,7 +21,7 @@
 <script>
   export default {
     props: {
-      avatar_url: {
+      avatarUrl: {
         type: String,
         default: ''
       },
@@ -69,10 +69,7 @@
     box-sizing: border-box
     width: 100%
     padding: 15px 30px
-    border-bottom: 1px solid #1e8ae8
-    border-top: 10px solid rgba(61, 158, 243, .3)
-    margin-top: 10px
-    box-shadow: 0 1px 5px 0px #1e8ae8
+    border-top: 1px solid lighten(#1e8ae8, 30)
     .card-header
       height: 40px
       line-height: 40px
