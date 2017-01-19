@@ -3,6 +3,7 @@ import { getUserByToken, getTopicCollect } from './api'
 export const storeState = {
   state: {
     userInfo: {
+      accessToken: '',
       isLogin: false,
       info: { },
       topicCollect: []
@@ -24,6 +25,9 @@ export const storeState = {
     },
     setTopicCollect (state, topicsId) {
       state.userInfo.topicCollect = topicsId
+    },
+    setAccessToken (state, accessToken) {
+      state.userInfo.accessToken = accessToken
     }
   },
   actions: {
@@ -36,6 +40,7 @@ export const storeState = {
       })
     },
     login ({ commit, dispatch }, accessToken) {
+      commit('setAccessToken', accessToken)
       return dispatch('getUser', accessToken).then((username) => {
         getTopicCollect(username, (topicCollect) => {
           commit('setTopicCollect', topicCollect)
