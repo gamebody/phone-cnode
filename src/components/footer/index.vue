@@ -23,7 +23,7 @@
           },
           {
             path: '/alert',
-            className: 'icon-alert'
+            className: 'icon-like'
           },
           {
             path: '/message',

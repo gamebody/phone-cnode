@@ -3,10 +3,10 @@ import { getUserByToken, getTopicCollect, dislike, like } from './api'
 export const storeState = {
   state: {
     userInfo: {
-      accessToken: '',
-      isLogin: false,
-      info: { },
-      topicCollect: []
+      accessToken: '', // accessToken值
+      isLogin: false, // 是否登陆
+      info: { }, // 用户信息
+      topicCollect: [] // 收藏topic的id
     }
   },
   getters: {
