@@ -66,7 +66,7 @@
       pop () {
         const Eul = document.getElementById('js_pop')
         const length = Eul.childNodes.length
-        if (this.i === length - 1) {
+        if (this.i === length) {
           console.log('没有弹药了')
           return
         }
@@ -111,6 +111,7 @@
       left: 0
       width: 100%
       height: 100%
+      overflow: hidden
       ul
         position: absolute
         width: 100%
@@ -126,7 +127,7 @@
       position: absolute
       z-index: 100
       left: 0
-      bottom: 55px
+      bottom: 50px
       display: flex
       width: 100%
       height: 55px
