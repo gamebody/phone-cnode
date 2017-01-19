@@ -146,7 +146,7 @@
             this.$store.dispatch('like', topicId)
           }
         } else {
-          console.log('请登录')
+          window.alert('请登录哦！')
           return
         }
       },

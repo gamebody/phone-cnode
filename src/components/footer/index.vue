@@ -22,7 +22,7 @@
             className: 'icon-find'
           },
           {
-            path: '/alert',
+            path: '/like',
             className: 'icon-like'
           },
           {

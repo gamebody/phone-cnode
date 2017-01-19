@@ -16,8 +16,8 @@ export const routes = [
         component: require('src/views/find')
       },
       {
-        path: '/alert',
-        component: require('src/views/alert')
+        path: '/like',
+        component: require('src/views/like')
       },
       {
         path: '/message',
