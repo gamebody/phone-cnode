@@ -27,7 +27,7 @@
           <i class="icon-like" :class="{active: isLike}"></i>
           <span>收藏</span>
         </div>
-        <div class="right">
+        <div class="right" @click="toggleWrite">
           <i class="icon-write"></i>
           <span>写评论</span>
         </div>
@@ -45,7 +45,12 @@
         </li>
       </ul>
     </div>
-
+    <div 
+      class="writerating-wrapper"
+      v-show="showWrite">
+      <writerating
+        :topic-id="topic.id"></writerating>   
+    </div>
     <div v-if="dataState.loading">
       <loading></loading>    
     </div>
@@ -62,6 +67,7 @@
   import ratingsort from 'components/ratingsort'
   import rating from 'components/rating'
   import loading from 'components/loading'
+  import writerating from 'components/writerating'
 
   export default {
     data () {
@@ -78,7 +84,8 @@
           err: false,
           finished: false
         },
-        scrollTop: 0
+        scrollTop: 0,
+        showWrite: false
       }
     },
     computed: {
@@ -131,6 +138,9 @@
       back () {
         this.$router.go(-1)
       },
+      toggleWrite () {
+        this.showWrite = !this.showWrite
+      },
       sort (sortSty) {
         this.sortStr = sortSty
       },
@@ -182,7 +192,8 @@
       vheader,
       ratingsort,
       rating,
-      loading
+      loading,
+      writerating
     }
   }
 </script>
@@ -262,5 +273,9 @@
               color: red
       .topic-ratings
         background: #f2f4f7
+    .writerating-wrapper
+      width: 100%
+      position: fixed
+      bottom: 0
         
 </style>
