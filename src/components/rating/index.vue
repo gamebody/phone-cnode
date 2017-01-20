@@ -9,8 +9,8 @@
       <div class="create-time">
         <span>{{ rating.create_at | formatDate }}</span>
       </div>
-      <div class="up">
-        <i class="icon-up"></i>
+      <div class="up" @click="upordown">
+        <i class="icon-up" :class="{'active': hasUp}"></i>
         <span>{{ upCount }}</span>
       </div>
     </div>
@@ -18,7 +18,15 @@
 </template>
 
 <script>
+  import { mapGetters } from 'vuex'
+  import Axios from 'axios'
+
   export default {
+    data () {
+      return {
+        count: 0
+      }
+    },
     props: {
       rating: {
         type: Object
@@ -26,7 +34,41 @@
     },
     computed: {
       upCount () {
-        return this.rating.ups.length
+        return this.rating.ups.length + this.count
+      },
+      ...mapGetters([
+        'isLogin',
+        'accessToken',
+        'userId'
+      ]),
+      hasUp () {
+        if (!this.isLogin) {
+          return
+        }
+        return this.rating.ups.some((id) => (id === this.userId))
+      }
+    },
+    methods: {
+      upordown (event) {
+        const tar = event.target
+        if (this.isLogin) {
+          Axios.post(`https://cnodejs.org/api/v1/reply/${this.rating.id}/ups`, {
+            accesstoken: this.accessToken
+          })
+          .then((res) => {
+            if (res.data.success) {
+              if (res.data.action === 'up') {
+                this.count += 1
+                tar.parentNode.getElementsByClassName('icon-up')[0].setAttribute('class', 'icon-up active')
+              } else {
+                tar.parentNode.getElementsByClassName('icon-up')[0].setAttribute('class', 'icon-up')
+                this.count -= 1
+              }
+            }
+          })
+        } else {
+          console.log('请登录')
+        }
       }
     }
   }
@@ -69,6 +111,8 @@
         i
           display: inline-block
           font-size: 15px
+          &.active
+            color: #1e8ae8
         span
           display: inline-block
           margin-left: 10px

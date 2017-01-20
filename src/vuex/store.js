@@ -12,6 +12,15 @@ export const storeState = {
   getters: {
     getUserInfo ({ userInfo }) {
       return userInfo
+    },
+    isLogin ({ userInfo }) {
+      return userInfo.isLogin
+    },
+    accessToken ({ userInfo }) {
+      return userInfo.accessToken
+    },
+    userId ({ userInfo }) {
+      return userInfo.info.id
     }
   },
   mutations: {
