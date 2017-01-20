@@ -46,7 +46,7 @@
     width: 41vw
     height: 220px
     padding: 20px
-    border: 1px solid lighten(#1e8ae8, 35)
+    border: 1px solid #1e8ae8
     border-radius: 4px
     position: relative
     box-shadow: 0 0 4px 0px #ccc

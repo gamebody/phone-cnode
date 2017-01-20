@@ -102,7 +102,8 @@
         line-height: 20px
         height: 20px
         border-bottom: 1px solid #1e8ae8
-        transition: all .5s cubic-bezier(.5,.5,.5,1.08)           
+        transition: all .2s cubic-bezier(.5,.5,.5,1.08)
+        overflow: auto              
     .writerating-put
       flex: 1
       display: inline-block
