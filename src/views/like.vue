@@ -8,8 +8,8 @@
     </div>
 
     <div class="like-stage">
-      <ul id="js_pop">
-        <li v-for="(item,index) in likeList">
+      <ul>
+        <li v-for="(item,index) in likeList" @click="route(item.id)">
           <likecard
             :title="item.title"
             :avatar-url="item.author.avatar_url"
@@ -21,16 +21,7 @@
       </ul>
     </div>
 
-    <div class="like-controll">
-      <div class="controll-left" @click="reset">
-        <i class="icon-go"></i>
-        <span>装填</span>
-      </div>
-      <div class="controll-right" @click="pop">
-        <i class="icon-go"></i>
-        <span>发射</span>
-      </div>
-    </div>
+    
   </div>
 </template>
 
@@ -63,23 +54,13 @@
           console.log('请登录')
         }
       },
-      pop () {
-        const Eul = document.getElementById('js_pop')
-        const length = Eul.childNodes.length
-        if (this.i === length) {
-          console.log('没有弹药了')
-          return
-        }
-        const randomLi = Eul.childNodes[this.i++]
-        randomLi.style.transform = `translateY(-300px)`
-      },
-      reset () {
-        this.i = 0
-        const Eul = document.getElementById('js_pop')
-        const length = Eul.childNodes.length
-        for (let t = 0; t < length; t++) {
-          Eul.childNodes[t].style.transform = `translateY(0)`
-        }
+      route (id) {
+        this.$router.push({
+          name: 'topic',
+          params: {
+            id
+          }
+        })
       }
     },
     created () {
@@ -106,40 +87,7 @@
       width: 100%
       z-index: 100
     .like-stage
-      position: relative
-      top: 0
-      left: 0
       width: 100%
-      height: 100%
-      overflow: hidden
-      ul
-        position: absolute
-        width: 100%
-        top: 60%
-        for i in 1 2 3 4 5 6 7 8 
-          li:nth-child({i})
-            width: 100%
-            position: absolute
-            background: #fff
-            top: 30px * i
-            transition: all 1s cubic-bezier(.5,.5,.5,1.08)
-    .like-controll
-      position: absolute
-      z-index: 100
-      left: 0
-      bottom: 50px
-      display: flex
-      width: 100%
-      height: 55px
-      border-top: 1px solid #1e8ae8
-      text-align: center
-      line-height: 55px
-      font-size: 0
-      background: #ccc
-      .controll-left
-      .controll-right
-        flex: 1
-        font-size: 20px
-        vertical-align: top
+      background: #fff
 
 </style>

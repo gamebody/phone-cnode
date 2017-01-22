@@ -44,6 +44,10 @@
       time: {
         type: String,
         default: '2'
+      },
+      tab: {
+        type: String,
+        default: ''
       }
     },
     filters: {
@@ -65,11 +69,15 @@
 
 <style lang='stylus'>
   .like-card
+    margin: 0 auto
     position: relative
     box-sizing: border-box
     width: 100%
     padding: 15px 30px
-    border-top: 1px solid lighten(#1e8ae8, 30)
+    border-bottom: 1px solid #ccc
+    box-shadow: 0 0 3px 0px #ccc
+    background: #fff
+    margin-bottom: 10px
     .card-header
       height: 40px
       line-height: 40px
