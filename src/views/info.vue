@@ -69,7 +69,7 @@
   export default {
     data () {
       return {
-        token: 'a7354828-6563-4a9d-b56a-9d847f7cfb40',
+        token: '',
         loading: false,
         hasNotReadCount: 0
       }
