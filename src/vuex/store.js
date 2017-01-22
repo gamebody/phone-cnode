@@ -1,4 +1,20 @@
-import { getUserByToken, getTopicCollect, dislike, like } from './api'
+import {
+  getUserByToken,
+  getTopicCollect,
+  dislike,
+  like,
+  getMessages,
+  getUserScore,
+  setAllMark } from './api'
+
+const defaultState = {
+  accessToken: '', // accessToken值
+  isLogin: false, // 是否登陆
+  info: { }, // 用户信息
+  topicCollect: [], // 收藏topic的id
+  score: 0, // 用户的积分
+  messages: { } // 未读和已读的消息
+}
 
 export const storeState = {
   state: {
@@ -6,7 +22,9 @@ export const storeState = {
       accessToken: '', // accessToken值
       isLogin: false, // 是否登陆
       info: { }, // 用户信息
-      topicCollect: [] // 收藏topic的id
+      topicCollect: [], // 收藏topic的id
+      score: 0, // 用户的积分
+      messages: { } // 未读和已读的消息
     }
   },
   getters: {
@@ -26,11 +44,14 @@ export const storeState = {
   mutations: {
     setInfo (state, user) {
       state.userInfo.info = { ...user }
+    },
+    setLogin (state) {
       state.userInfo.isLogin = true
     },
     deleteUserInfo (state) {
-      state.userInfo.info = {}
-      state.userInfo.isLogin = false
+      state.userInfo = {
+        ...defaultState
+      }
     },
     setTopicCollect (state, topicsId) {
       state.userInfo.topicCollect = topicsId
@@ -46,6 +67,15 @@ export const storeState = {
     },
     addTopicCollect (state, topicId) {
       state.userInfo.topicCollect.push(topicId)
+    },
+    setScore (state, score) {
+      state.userInfo.score = score
+    },
+    setMessages (state, messages) {
+      state.userInfo.messages = messages
+    },
+    setMessagesHasNotRead (state) {
+      state.userInfo.messages.hasnot_read_messages = []
     }
   },
   actions: {
@@ -59,14 +89,30 @@ export const storeState = {
     },
     login ({ commit, dispatch }, accessToken) {
       commit('setAccessToken', accessToken)
-      return dispatch('getUser', accessToken).then((username) => {
-        getTopicCollect(username, (topicCollect) => {
-          const collectId = []
-          topicCollect.forEach((item) => {
-            collectId.push(item.id)  // 把收藏的文章的id存到数组中
+      return new Promise((resolve, reject) => {
+        dispatch('getUser', accessToken).then((username) => {
+          getTopicCollect(username, (topicCollect) => {
+            const collectId = []
+            topicCollect.forEach((item) => {
+              collectId.push(item.id)  // 把收藏的文章的id存到数组中
+            })
+            commit('setTopicCollect', collectId)
           })
-          commit('setTopicCollect', collectId)
+          getUserScore(username, (score) => {
+            commit('setScore', score)
+          })
+          getMessages(accessToken, (messages) => {
+            commit('setMessages', messages)
+            resolve()
+          })
         })
+      })
+    },
+    allMark ({ commit, dispatch }, accessToken) {
+      setAllMark(accessToken, (data) => {
+        if (data) {
+          commit('setMessagesHasNotRead')
+        }
       })
     },
     dislike ({ commit, dispatch, state }, topicId) {

@@ -53,3 +53,41 @@ export const like = (accessToken, topicId, callback) => {
       console.log(err)
     })
 }
+
+export const getUserScore = (username, callback) => {
+  Axios.get(`https://cnodejs.org/api/v1/user/${username}`)
+    .then((res) => {
+      if (res.statusText === 'OK' && res.status === 200) {
+        callback(res.data.data.score)
+      }
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+}
+
+export const getMessages = (accessToken, callback) => {
+  Axios.get(`https://cnodejs.org/api/v1/messages?accesstoken=${accessToken}`)
+    .then((res) => {
+      if (res.statusText === 'OK' && res.status === 200) {
+        callback(res.data.data)
+      }
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+}
+
+export const setAllMark = (accessToken, callback) => {
+  Axios.post(`https://cnodejs.org/api/v1/message/mark_all`, {
+    accesstoken: accessToken
+  })
+    .then((res) => {
+      if (res.statusText === 'OK' && res.status === 200) {
+        callback(res.data.data)
+      }
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+}
