@@ -11,7 +11,7 @@
       <span>{{ value }}</span>
     </div>
     <div class="card-info">
-      <i class="icon-close"></i>
+      <i class="icon-level"></i>
       <span>{{ score }}</span>
     </div>
   </div>  
@@ -85,7 +85,7 @@
       border-radius: 2px
       i
         line-height: 30px
-        font-size: 20px
+        font-size: 16px
       span
         line-height: 30px
         vertical-align: top
