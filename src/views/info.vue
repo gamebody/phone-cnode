@@ -87,6 +87,7 @@
         this.loading = true
         this.$store.dispatch('login', this.token).then(() => {
           this.$store.commit('setLogin')
+          window.localStorage.setItem('userInfo', JSON.stringify(this.$store.state.userInfo))
           this.loading = false
         })
       },

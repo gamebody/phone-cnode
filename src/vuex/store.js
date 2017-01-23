@@ -18,14 +18,7 @@ const defaultState = {
 
 export const storeState = {
   state: {
-    userInfo: {
-      accessToken: '', // accessToken值
-      isLogin: false, // 是否登陆
-      info: { }, // 用户信息
-      topicCollect: [], // 收藏topic的id
-      score: 0, // 用户的积分
-      messages: { } // 未读和已读的消息
-    }
+    userInfo: JSON.parse(window.localStorage.getItem('userInfo')) || Object.assign(defaultState)
   },
   getters: {
     getUserInfo ({ userInfo }) {
@@ -52,6 +45,7 @@ export const storeState = {
       state.userInfo = {
         ...defaultState
       }
+      window.localStorage.removeItem('userInfo')
     },
     setTopicCollect (state, topicsId) {
       state.userInfo.topicCollect = topicsId
