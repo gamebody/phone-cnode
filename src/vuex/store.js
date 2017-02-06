@@ -18,7 +18,7 @@ const defaultState = {
 
 export const storeState = {
   state: {
-    userInfo: JSON.parse(window.localStorage.getItem('userInfo')) || Object.assign(defaultState)
+    userInfo: JSON.parse(window.localStorage.getItem('userInfo')) || Object.assign({}, defaultState)
   },
   getters: {
     getUserInfo ({ userInfo }) {
