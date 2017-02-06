@@ -2,9 +2,9 @@
 
 > A Vue.js project
 
-![1](https://github.com/gamebody/phone-cnode/raw/master/screenshot/screen1.jpg)
-![2](https://github.com/gamebody/phone-cnode/raw/master/screenshot/screen2.jpg)
-![3](https://github.com/gamebody/phone-cnode/raw/master/screenshot/screen3.jpg)
+![1](https://github.com/gamebody/phone-cnode/raw/master/screenshot/screen1.png)
+![2](https://github.com/gamebody/phone-cnode/raw/master/screenshot/screen2.png)
+![3](https://github.com/gamebody/phone-cnode/raw/master/screenshot/screen3.png)
 
 
 
