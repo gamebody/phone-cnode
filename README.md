@@ -2,8 +2,14 @@
 
 > A Vue.js project
 
+> 基于cnode社区api
+
+项目截图
+
 ![1](https://github.com/gamebody/phone-cnode/raw/master/screenshot/screen1.png)
+
 ![2](https://github.com/gamebody/phone-cnode/raw/master/screenshot/screen2.png)
+
 ![3](https://github.com/gamebody/phone-cnode/raw/master/screenshot/screen3.png)
 
 
