@@ -5,7 +5,7 @@ import App from './App'
 import VueRouter from 'vue-router'
 import Vuex from 'vuex'
 import infiniteScroll from 'vue-infinite-scroll'
-
+import { storeState } from './vuex/store'
 import { routes } from 'src/routes'
 /* eslint-disable no-new */
 Vue.use(VueRouter)
@@ -24,16 +24,16 @@ import { formatDate } from 'src/filters/formatDate'
 Vue.filter('formatDate', formatDate)
 
 const router = new VueRouter({
-  mode: 'history',
   routes
 })
 
-import { storeState } from './vuex/store'
 const store = new Vuex.Store(storeState)
+
 new Vue({
   el: '#app',
-  template: '<App/>',
-  components: { App },
   router,
-  store
+  store,
+  template: '<App/>',
+  components: { App }
+
 })
